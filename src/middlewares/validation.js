@@ -15,7 +15,6 @@ module.exports = (schema) => (req, res, next) => {
     Object.keys(schema).forEach((key) => {
         const validationOptions = Array.isArray(req[key]) ? options.array : options.basic;
         const { value, error } = schema[key].validate(req[key], validationOptions);
-        console.log(error);
         if (error) {
             console.log(error);
             const message = error.details[0].message || 'Invalid Inputs';
