@@ -1,9 +1,9 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "title": "DealAmaze Notification Service API",
+    "title": "AdvikaInnovate Template Service API",
     "version": "1.0.0",
-    "description": "API documentation for the Notification Microservice"
+    "description": "API documentation for the Base Microservice Template including User CRUD and Health Check."
   },
   "servers": [
     {
@@ -12,250 +12,103 @@
     }
   ],
   "components": {
+    "securitySchemes": {
+      "BearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    },
     "schemas": {
-      "Notification": {
+      "User": {
         "type": "object",
         "properties": {
-          "eventType": {
-            "type": "string",
-            "example": "ORDER_PLACED"
-          },
-          "channel": {
-            "type": "string",
-            "enum": ["EMAIL", "SMS", "PUSH", "WEB"],
-            "example": "EMAIL"
-          },
-          "recipient": {
-            "type": "string",
-            "example": "user@example.com"
-          },
-          "payload": {
-            "type": "object",
-            "example": { "name": "John Doe", "orderId": "12345" }
-          }
-        }
-      },
-      "Template": {
-        "type": "object",
-        "properties": {
-          "eventCode": { "type": "string", "example": "ORDER_PLACED" },
-          "channelName": { "type": "string", "example": "EMAIL" },
-          "subject": { "type": "string", "example": "Order Confirmation" },
-          "body": { "type": "string", "example": "<h1>Hi {{name}}</h1>" },
-          "placeholders": { "type": "array", "items": { "type": "string" } },
-          "language": { "type": "string", "example": "en" }
-        }
-      },
-      "Event": {
-        "type": "object",
-        "properties": {
-          "name": { "type": "string", "example": "Order Placed" },
-          "code": { "type": "string", "example": "ORDER_PLACED" },
-          "description": { "type": "string" }
-        }
-      },
-      "Channel": {
-        "type": "object",
-        "properties": {
-          "config": { "type": "object" },
-          "isActive": { "type": "boolean" }
+          "id": { "type": "string", "format": "uuid" },
+          "email": { "type": "string", "example": "user@example.com" },
+          "displayName": { "type": "string", "example": "john_doe" },
+          "role": { "type": "string", "example": "ADMIN" },
+          "status": { "type": "string", "example": "active" }
         }
       }
     }
   },
   "paths": {
-    "/notifications/send": {
-      "post": {
-        "summary": "Send a notification",
-        "tags": ["Notifications"],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": { "$ref": "#/components/schemas/Notification" }
+    "/healthz": {
+      "get": {
+        "summary": "Get service health status",
+        "tags": ["System"],
+        "responses": {
+          "200": {
+            "description": "Service is running healthy",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": { "type": "string", "example": "OK" },
+                    "message": { "type": "string", "example": "Service is healthy" },
+                    "timestamp": { "type": "string", "format": "date-time" }
+                  }
+                }
+              }
             }
           }
-        },
-        "responses": {
-          "201": { "description": "Notification created successfully" },
-          "400": { "description": "Invalid input" }
         }
       }
     },
-    "/notifications": {
-      "get": {
-        "summary": "List notifications",
-        "tags": ["Notifications"],
-        "parameters": [
-          { "in": "query", "name": "userId", "schema": { "type": "string" } },
-          { "in": "query", "name": "userType", "schema": { "type": "string" } },
-          { "in": "query", "name": "notificationTypeCode", "schema": { "type": "string" } },
-          { "in": "query", "name": "categoryCode", "schema": { "type": "string" } },
-          { "in": "query", "name": "channel", "schema": { "type": "string" } },
-          { "in": "query", "name": "status", "schema": { "type": "string" } },
-          { "in": "query", "name": "isRead", "schema": { "type": "boolean" } },
-          { "in": "query", "name": "limit", "schema": { "type": "integer" } },
-          { "in": "query", "name": "page", "schema": { "type": "integer" } }
-        ],
-        "responses": {
-          "200": { "description": "List of notifications" }
-        }
-      }
-    },
-    "/notifications/unread-count": {
-      "get": {
-        "summary": "Get unread notifications count",
-        "tags": ["Notifications"],
-        "parameters": [
-          { "in": "query", "name": "userId", "required": true, "schema": { "type": "string" } },
-          { "in": "query", "name": "userType", "required": true, "schema": { "type": "string" } }
-        ],
-        "responses": {
-          "200": { "description": "Unread count" }
-        }
-      }
-    },
-    "/notifications/{id}/read": {
-      "patch": {
-        "summary": "Mark notification as read",
-        "tags": ["Notifications"],
-        "parameters": [
-          { "in": "path", "name": "id", "required": true, "schema": { "type": "string", "format": "uuid" } }
-        ],
-        "responses": {
-          "200": { "description": "Notification marked as read" }
-        }
-      }
-    },
-    "/notifications/mark-all-read": {
+    "/users/register": {
       "post": {
-        "summary": "Mark all notifications as read",
-        "tags": ["Notifications"],
+        "summary": "Register a new user",
+        "tags": ["Users"],
         "requestBody": {
           "required": true,
           "content": {
             "application/json": {
               "schema": {
                 "type": "object",
+                "required": ["email", "password", "displayName"],
                 "properties": {
-                  "userId": { "type": "string" },
-                  "userType": { "type": "string" }
-                },
-                "required": ["userId", "userType"]
+                  "email": { "type": "string", "example": "user@example.com" },
+                  "password": { "type": "string", "example": "password123" },
+                  "displayName": { "type": "string", "example": "john_doe" }
+                }
               }
             }
           }
         },
         "responses": {
-          "200": { "description": "All notifications marked as read" }
+          "201": { "description": "User registered successfully" },
+          "400": { "description": "Invalid input details" }
         }
       }
     },
-    "/templates": {
+    "/users/profile": {
       "get": {
-        "summary": "List templates",
-        "tags": ["Templates"],
-        "parameters": [
-          { "in": "query", "name": "language", "schema": { "type": "string" } },
-          { "in": "query", "name": "isActive", "schema": { "type": "boolean" } }
-        ],
-        "responses": { "200": { "description": "List of templates" } }
-      },
-      "post": {
-        "summary": "Create a template",
-        "tags": ["Templates"],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": { "$ref": "#/components/schemas/Template" }
+        "summary": "Get authenticated user profile",
+        "tags": ["Users"],
+        "security": [{ "BearerAuth": [] }],
+        "responses": {
+          "200": {
+            "description": "User profile details",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/User" }
+              }
             }
-          }
-        },
-        "responses": { "201": { "description": "Template created" } }
+          },
+          "401": { "description": "Unauthorized access" }
+        }
       }
     },
-    "/templates/{id}": {
+    "/users/all": {
       "get": {
-        "summary": "Get template by ID",
-        "tags": ["Templates"],
-        "parameters": [{ "in": "path", "name": "id", "required": true, "schema": { "type": "integer" } }],
-        "responses": { "200": { "description": "Template details" } }
-      },
-      "put": {
-        "summary": "Update template",
-        "tags": ["Templates"],
-        "parameters": [{ "in": "path", "name": "id", "required": true, "schema": { "type": "integer" } }],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": { "$ref": "#/components/schemas/Template" }
-            }
-          }
-        },
-        "responses": { "200": { "description": "Template updated" } }
-      }
-    },
-    "/events": {
-      "get": {
-        "summary": "List events",
-        "tags": ["Events"],
-        "responses": { "200": { "description": "List of events" } }
-      },
-      "post": {
-        "summary": "Create an event",
-        "tags": ["Events"],
-        "requestBody": {
-          "content": {
-            "application/json": { "schema": { "$ref": "#/components/schemas/Event" } }
-          }
-        },
-        "responses": { "201": { "description": "Event created" } }
-      }
-    },
-    "/events/{id}": {
-      "get": {
-        "summary": "Get event by ID",
-        "tags": ["Events"],
-        "parameters": [{ "in": "path", "name": "id", "required": true, "schema": { "type": "integer" } }],
-        "responses": { "200": { "description": "Event details" } }
-      },
-      "put": {
-        "summary": "Update event",
-        "tags": ["Events"],
-        "parameters": [{ "in": "path", "name": "id", "required": true, "schema": { "type": "integer" } }],
-        "requestBody": {
-          "content": {
-            "application/json": { "schema": { "$ref": "#/components/schemas/Event" } }
-          }
-        },
-        "responses": { "200": { "description": "Event updated" } }
-      }
-    },
-    "/channels": {
-      "get": {
-        "summary": "List channels",
-        "tags": ["Channels"],
-        "responses": { "200": { "description": "List of channels" } }
-      }
-    },
-    "/channels/{id}": {
-      "get": {
-        "summary": "Get channel by ID",
-        "tags": ["Channels"],
-        "parameters": [{ "in": "path", "name": "id", "required": true, "schema": { "type": "integer" } }],
-        "responses": { "200": { "description": "Channel details" } }
-      },
-      "put": {
-        "summary": "Update channel",
-        "tags": ["Channels"],
-        "parameters": [{ "in": "path", "name": "id", "required": true, "schema": { "type": "integer" } }],
-        "requestBody": {
-          "content": {
-            "application/json": { "schema": { "$ref": "#/components/schemas/Channel" } }
-          }
-        },
-        "responses": { "200": { "description": "Channel updated" } }
+        "summary": "Get all users list (Admin only)",
+        "tags": ["Users"],
+        "security": [{ "BearerAuth": [] }],
+        "responses": {
+          "200": { "description": "List of users" },
+          "401": { "description": "Unauthorized" }
+        }
       }
     }
   }

@@ -1,117 +1,86 @@
-# DealAmaze Notification Microservice
+# AdvikaInnovate Backend Service Template
 
-A decoupled, scalable notification processing system built with Node.js, Express, and PostgreSQL. This service handles the delivery of notifications via Email, SMS, and Push channels, triggered either via REST API or AWS SQS messages.
+A production-ready microservice template boilerplate built with Node.js, Express, and PostgreSQL using Sequelize ORM. It provides built-in support for User CRUD, JWT verification/authorization, Joi validations, structured Pino logging, and automated API Swagger docs.
 
 ## 🚀 Features
 
-*   **Multi-Channel Support**: Email (SMTP), SMS (Twilio-ready), Push (Firebase-ready).
-*   **Decoupled Architecture**: Supports asynchronous processing via AWS SQS.
-*   **Template Engine**: Dynamic content rendering with placeholder replacement.
-*   **Repository Pattern**: Clean separation of concerns between data access and business logic.
-*   **Functional Programming**: Core logic implemented using functional modules.
-*   **Retry Mechanism**: Configurable retries for failed notifications.
-*   **REST API**: Comprehensive endpoints for managing templates, events, and channels.
-*   **Swagger Documentation**: Interactive API docs available at `/api-docs`.
+*   **User CRUD Operations**: Ready-to-use CRUD endpoints for user management.
+*   **Stateless Authorization**: Robust JWT verification middleware (`validateAccessToken`, `validateRefreshToken`, `optionalAuth`) ready for microservice deployments.
+*   **Validation Layer**: Flexible input validation schema architecture using Joi.
+*   **Database Migrations**: Simple schema migrations and database seeding using Sequelize-CLI.
+*   **Logging**: High-performance logging utilizing Pino and Pino-pretty for clean local terminal debugging.
+*   **API Documentation**: Automatic interactive documentation rendered via Swagger at `/api-docs`.
+*   **Pre-configured Linting & Formatting**: Strict linting rules using ESLint and Prettier.
 
 ## 🛠️ Tech Stack
 
-*   **Runtime**: Node.js
+*   **Runtime**: Node.js / Bun
 *   **Framework**: Express.js
 *   **Database**: PostgreSQL
 *   **ORM**: Sequelize
-*   **Queue**: AWS SQS (`@aws-sdk/client-sqs`)
 *   **Validation**: Joi
-*   **Logging**: Pino
-*   **Documentation**: Swagger / OpenAPI 3.0
+*   **Logging**: Pino & Pino-Pretty
+*   **API Documentation**: Swagger / OpenAPI 3.0
 
 ## 📂 Project Structure
 
 ```
 src/
-├── config/         # Configuration (DB, AWS, SMTP)
-├── database/       # Migrations, Models, Seeders
-├── docs/           # Swagger JSON
-├── helpers/        # Utility functions & Channel Providers
-├── middlewares/    # Express middlewares
-├── modules/        # Business logic (Controllers, Services, Routes)
-├── repositories/   # Data access layer (Functional)
-├── workers/        # SQS Consumer logic
-├── app.js          # Express app setup
-└── worker.js       # SQS Worker entry point
+├── config/         # App, DB, and SMTP configuration
+├── database/       # Migrations, Models, and Seeders
+├── docs/           # Swagger JSON specifications
+├── helpers/        # Centralized HTTP error handlers and helper classes
+├── middlewares/    # Express middlewares (Validation, Authorisation)
+├── modules/        # Business logic modules (Users CRUD)
+├── routes/         # Central API route index
+├── utils/          # Logger, Email client, JWT and encryption utilities
+├── app.js          # Express app definition and core middlewares
+└── server.js       # App listener port configuration
 ```
 
 ## ⚙️ Setup & Installation
 
-1.  **Clone the repository**
+1.  **Install dependencies**
     ```bash
-    git clone <repository-url>
-    cd dealamaze-notifications-service
-    ```
-
-2.  **Install dependencies**
-    ```bash
+    bun install
+    # or
     npm install
     ```
 
-3.  **Environment Configuration**
-    Copy `.env.example` to `.env` and update the values.
+2.  **Environment Configuration**
+    Copy `.env.sample` to `.env` and fill out your PostgreSQL database and JWT token secrets.
     ```bash
-    cp .env.example .env
+    cp .env.sample .env
     ```
-    *Ensure you provide valid DB credentials and AWS keys.*
 
-4.  **Database Setup**
-    Run migrations to create tables.
+3.  **Database Migration**
+    Run the migrations to set up the database tables (e.g., `users` table):
     ```bash
-    npm run prestart
-    ```
-    Seed the database with default channels (EMAIL, SMS, PUSH).
-    ```bash
-    npm run db:seed
+    bun run prestart
     ```
 
 ## 🏃‍♂️ Running the Application
 
-### API Server
-Starts the REST API server (default port: 5002).
+### Development Mode (with hot-reloading)
 ```bash
-npm run dev      # Development (Nodemon)
-npm start        # Production
+bun run dev
+# or
+npm run dev
 ```
 
-### SQS Worker
-Starts the background worker to consume messages from AWS SQS.
+### Production Mode
 ```bash
-npm run worker
+bun start
+# or
+npm start
 ```
 
 ## 📖 API Documentation
 
-Once the server is running, visit:
+Once the server starts up, interactive API documentation is available at:
 **http://localhost:5002/api-docs**
 
-## 🧪 Testing
+## 🩺 Health Check
 
-Run the test suite (if configured):
-```bash
-npm test
-```
-
-## ☁️ AWS SQS Integration
-
-The service listens to two queues defined in `.env`:
-*   `AWS_SQS_ORDERS_URL`: High priority (Orders, Payments)
-*   `AWS_SQS_PROMOTIONS_URL`: Low priority (Marketing)
-
-**Message Format:**
-```json
-{
-  "eventType": "ORDER_PLACED",
-  "channel": "EMAIL",
-  "recipient": "user@example.com",
-  "payload": {
-    "name": "John Doe",
-    "orderId": "12345"
-  }
-}
-```
+Verify service health status at:
+**http://localhost:5002/api/v1/healthz**
