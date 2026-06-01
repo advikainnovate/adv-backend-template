@@ -12,7 +12,7 @@
         "prestart": "npx sequelize-cli db:migrate",
         "db:seed": "npx sequelize-cli db:seed:all",
         "db:reset": "npx sequelize-cli db:migrate:undo:all && npx sequelize-cli db:migrate",
-        "db:create:script": "node src/utils/dbCreate.js",
+        "db:create:script": "node src/utils/dbCreate.util.js",
         "start": "node server.js",
         "dev": "nodemon server.js",
         "prod:start": "pm2 start ecosystem.config.js --env production",
