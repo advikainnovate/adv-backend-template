@@ -60,106 +60,70 @@ exports.profileRegister = async (userId, payload) => {
 };
 
 exports.profile = async (userId) => {
-    try {
-        const response = await userRepository.findUser(userId);
-        if (!response) {
-            throw new NotFoundException(MESSAGES.ERROR.USER_NOT_EXIST);
-        }
-        return serviceResponse(true, HTTP_CODES.CREATED, MESSAGES.SUCCESS.OK, response);
-    } catch (error) {
-        throw error;
+    const response = await userRepository.findUser(userId);
+    if (!response) {
+        throw new NotFoundException(MESSAGES.ERROR.USER_NOT_EXIST);
     }
+    return serviceResponse(true, HTTP_CODES.CREATED, MESSAGES.SUCCESS.OK, response);
 };
 
 exports.checkDisplayName = async (payload) => {
-    try {
-        const response = await userRepository.checkDisplayName(payload);
-        return serviceResponse(true, HTTP_CODES.CREATED, MESSAGES.SUCCESS.OK, response);
-    } catch (error) {
-        throw error;
-    }
+    const response = await userRepository.checkDisplayName(payload);
+    return serviceResponse(true, HTTP_CODES.CREATED, MESSAGES.SUCCESS.OK, response);
 };
 
 exports.getDashboard = async (query) => {
-    try {
-        const response = await userRepository.getDashboard(query);
-        if (!response) {
-            throw new NotFoundException(MESSAGES.ERROR.USER_NOT_EXIST);
-        }
-        return serviceResponse(true, HTTP_CODES.CREATED, MESSAGES.SUCCESS.OK, response);
-    } catch (error) {
-        throw error;
+    const response = await userRepository.getDashboard(query);
+    if (!response) {
+        throw new NotFoundException(MESSAGES.ERROR.USER_NOT_EXIST);
     }
+    return serviceResponse(true, HTTP_CODES.CREATED, MESSAGES.SUCCESS.OK, response);
 };
 
 exports.getAllUsers = async (query) => {
-    try {
-        const response = await userRepository.getAllUsers(query);
-        if (!response) {
-            throw new NotFoundException(MESSAGES.ERROR.USER_NOT_EXIST);
-        }
-        return serviceResponse(true, HTTP_CODES.CREATED, MESSAGES.SUCCESS.OK, response);
-    } catch (error) {
-        throw error;
+    const response = await userRepository.getAllUsers(query);
+    if (!response) {
+        throw new NotFoundException(MESSAGES.ERROR.USER_NOT_EXIST);
     }
+    return serviceResponse(true, HTTP_CODES.CREATED, MESSAGES.SUCCESS.OK, response);
 };
 
 exports.getAllUserDropdown = async (query) => {
-    try {
-        const response = await userRepository.getAllUserDropdown(query);
-        if (!response) {
-            throw new NotFoundException(MESSAGES.ERROR.USER_NOT_EXIST);
-        }
-        return serviceResponse(true, HTTP_CODES.CREATED, MESSAGES.SUCCESS.OK, response);
-    } catch (error) {
-        throw error;
+    const response = await userRepository.getAllUserDropdown(query);
+    if (!response) {
+        throw new NotFoundException(MESSAGES.ERROR.USER_NOT_EXIST);
     }
+    return serviceResponse(true, HTTP_CODES.CREATED, MESSAGES.SUCCESS.OK, response);
 };
 
 exports.findUser = async (userId) => {
-    try {
-        const response = await userRepository.findUser(userId);
-        if (!response) {
-            throw new NotFoundException(MESSAGES.ERROR.USER_NOT_EXIST);
-        }
-        return serviceResponse(true, HTTP_CODES.CREATED, MESSAGES.SUCCESS.OK, response);
-    } catch (error) {
-        throw error;
+    const response = await userRepository.findUser(userId);
+    if (!response) {
+        throw new NotFoundException(MESSAGES.ERROR.USER_NOT_EXIST);
     }
+    return serviceResponse(true, HTTP_CODES.CREATED, MESSAGES.SUCCESS.OK, response);
 };
 
 exports.changePassword = async (id, payload) => {
-    try {
-        const response = await userRepository.changePassword(id, payload);
-        if (!response) {
-            throw new NotFoundException(MESSAGES.ERROR.USER_NOT_EXIST);
-        }
-        return serviceResponse(true, HTTP_CODES.CREATED, MESSAGES.SUCCESS.OK, response);
-    } catch (error) {
-        throw error;
+    const response = await userRepository.changePassword(id, payload);
+    if (!response) {
+        throw new NotFoundException(MESSAGES.ERROR.USER_NOT_EXIST);
     }
+    return serviceResponse(true, HTTP_CODES.CREATED, MESSAGES.SUCCESS.OK, response);
 };
 
 exports.updateUser = async (id, payload) => {
-    try {
-        const response = await userRepository.update(id, payload);
-        if (!response) {
-            throw new NotFoundException(MESSAGES.ERROR.USER_NOT_EXIST);
-        }
-        return serviceResponse(true, HTTP_CODES.CREATED, MESSAGES.SUCCESS.OK, response);
-    } catch (error) {
-        throw error;
+    const response = await userRepository.update(id, payload);
+    if (!response) {
+        throw new NotFoundException(MESSAGES.ERROR.USER_NOT_EXIST);
     }
+    return serviceResponse(true, HTTP_CODES.CREATED, MESSAGES.SUCCESS.OK, response);
 };
 
 exports.deleteUser = async (id) => {
-    try {
-        const response = await userRepository.delete(id);
-        if (!response) {
-            throw new NotFoundException(MESSAGES.ERROR.USER_NOT_EXIST);
-        }
-        return serviceResponse(true, HTTP_CODES.CREATED, MESSAGES.SUCCESS.OK, response);
-    } catch (error) {
-        throw error;
+    const response = await userRepository.delete(id);
+    if (!response) {
+        throw new NotFoundException(MESSAGES.ERROR.USER_NOT_EXIST);
     }
+    return serviceResponse(true, HTTP_CODES.CREATED, MESSAGES.SUCCESS.OK, response);
 };

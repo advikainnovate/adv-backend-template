@@ -67,43 +67,27 @@ exports.updateProfile = async (userId, payload) => {
 };
 
 exports.findUserProfile = async (userId) => {
-    try {
-        const response = await db.UserProfileModel.findOne({ where: { userId: userId, deletedAt: null } });
-        return response;
-    } catch (error) {
-        throw error;
-    }
+    const response = await db.UserProfileModel.findOne({ where: { userId: userId, deletedAt: null } });
+    return response;
 };
 
 exports.findUserByEmail = async (email) => {
-    try {
-        const response = await db.UserModel.findOne({ where: { email: email } });
-        return response;
-    } catch (error) {
-        throw error;
-    }
+    const response = await db.UserModel.findOne({ where: { email: email } });
+    return response;
 };
 
 exports.findUserByPhoneNumber = async (phone) => {
-    try {
-        const response = await db.UserModel.findOne({ where: { phoneNumber: phone } });
-        return response;
-    } catch (error) {
-        throw error;
-    }
+    const response = await db.UserModel.findOne({ where: { phoneNumber: phone } });
+    return response;
 };
 
 exports.checkDisplayName = async (payload) => {
-    try {
-        payload.display_name = payload.display_name.toLowerCase();
+    payload.display_name = payload.display_name.toLowerCase();
 
-        const response = await db.UserModel.findOne({ where: { display_name: payload.display_name } });
-        if (response) return { isCreated: false };
+    const response = await db.UserModel.findOne({ where: { display_name: payload.display_name } });
+    if (response) return { isCreated: false };
 
-        return { isCreated: true };
-    } catch (error) {
-        throw error;
-    }
+    return { isCreated: true };
 };
 
 exports.findUser = async (userId) => {
