@@ -45,20 +45,6 @@ exports.register = async (payload) => {
     }
 };
 
-exports.profileRegister = async (userId, payload) => {
-    const existProfile = await userRepository.findUserProfile(userId);
-    // if profile exist then we jsut update record.
-    if (existProfile) {
-        await userRepository.updateProfile(userId, payload);
-        return serviceResponse(true, HTTP_CODES.OK, MESSAGES.SUCCESS.UPDATED);
-    }
-
-    // profile created
-    payload.userId = userId;
-    const response = await userRepository.profileRegister(payload);
-    return serviceResponse(true, HTTP_CODES.CREATED, MESSAGES.SUCCESS.CREATED, response);
-};
-
 exports.profile = async (userId) => {
     const response = await userRepository.findUser(userId);
     if (!response) {

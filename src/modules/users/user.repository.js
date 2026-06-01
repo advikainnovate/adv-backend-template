@@ -55,22 +55,6 @@ exports.findLastUser = async (userType) => {
     return response;
 };
 
-exports.profileRegister = async (payload) => {
-    payload.id = uuidv4();
-    const response = await db.UserProfileModel.create(payload);
-    return response;
-};
-
-exports.updateProfile = async (userId, payload) => {
-    const response = await db.UserProfileModel.update(payload, { where: { userId: userId, deletedAt: null } });
-    return response;
-};
-
-exports.findUserProfile = async (userId) => {
-    const response = await db.UserProfileModel.findOne({ where: { userId: userId, deletedAt: null } });
-    return response;
-};
-
 exports.findUserByEmail = async (email) => {
     const response = await db.UserModel.findOne({ where: { email: email } });
     return response;

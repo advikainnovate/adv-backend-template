@@ -14,19 +14,6 @@ exports.register = async (req, res, next) => {
     }
 };
 
-exports.profileRegister = async (req, res, next) => {
-    try {
-        const { body, params } = req;
-        const response = await userService.profileRegister(params.userId, body);
-        if (!response.success) {
-            return errorResponse(res, response.code, response.message, response.data);
-        }
-        return successResponse(res, response.code, response.message, response.data);
-    } catch (error) {
-        next(error);
-    }
-};
-
 exports.profile = async (req, res, next) => {
     try {
         const { user } = req;

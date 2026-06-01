@@ -13,16 +13,6 @@ const userSchema = {
             gender: Joi.string().valid('male', 'female', 'other').required(),
         }),
     },
-    profileRegister: {
-        body: Joi.object().keys({
-            idProof: Joi.string().trim().optional(),
-            idProofDoc: Joi.string().trim().optional(),
-            addressProof: Joi.string().trim().optional(),
-            addressProofDoc: Joi.string().trim().optional(),
-            displayPic: Joi.string().trim().optional(),
-            description: Joi.string().trim().optional(),
-        }),
-    },
     update: {
         body: Joi.object().keys({
             gender: Joi.string().valid('male', 'female', 'other').optional(),

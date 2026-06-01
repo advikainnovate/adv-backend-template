@@ -11,12 +11,6 @@ router.post(
     validationMiddleware(userSchema.register),
     userController.register
 );
-router.post(
-    '/:userId/avatarRegister',
-    // validateAccessToken([CONSTANTS.ROLE.ADMIN]),
-    validationMiddleware(userSchema.profileRegister),
-    userController.profileRegister
-);
 
 router.get('/dashboard', validateAccessToken([CONSTANTS.ROLE.ADMIN]), userController.getDashboard);
 router.get('/profile', validateAccessToken([CONSTANTS.ROLE.ADMIN]), userController.profile);
