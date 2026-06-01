@@ -30,19 +30,5 @@ module.exports = {
         USER: process.env.SMTP_USER,
         PASS: process.env.SMTP_PASS,
         FROM: process.env.SMTP_FROM || 'DealAmaze <operations@gotruks.com>',
-    },
-    AWS: {
-        ACCESS_KEY_ID: process.env.AWS_ACCESS_KEY_ID,
-        SECRET_ACCESS_KEY: process.env.AWS_SECRET_ACCESS_KEY,
-        REGION: process.env.AWS_REGION,
-        QUEUES: {
-            ORDERS: process.env.AWS_SQS_ORDERS_URL,
-            PROMOTIONS: process.env.AWS_SQS_PROMOTIONS_URL,
-        }
-    },
-    FCM: {
-        PROJECT_ID: process.env.FCM_PROJECT_ID,
-        CLIENT_EMAIL: process.env.FCM_CLIENT_EMAIL,
-        PRIVATE_KEY: process.env.FCM_PRIVATE_KEY ? process.env.FCM_PRIVATE_KEY.replace(/\\n/g, '\n').replace(/"/g, '') : undefined
     }
 };
