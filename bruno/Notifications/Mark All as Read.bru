@@ -1,0 +1,39 @@
+meta {
+  name: Mark All as Read
+  type: http
+  seq: 5
+}
+
+post {
+  url: {{baseUrl}}/notifications/mark-all-read
+  body: none
+  auth: inherit
+}
+
+params:query {
+  ~userId: user123
+  ~userType: customer
+}
+
+docs {
+  # Mark All Notifications as Read
+  
+  Marks all unread notifications for a specific user as read.
+  
+  ## Query Parameters
+  
+  | Field | Type | Required | Description |
+  |-------|------|----------|-------------|
+  | `userId` | string | Optional | User ID (falls back to authorization token) |
+  | `userType` | string | Optional | User type (customer, driver, admin) (falls back to authorization token) |
+  
+  ## Example Response
+  ```json
+  {
+    "success": true,
+    "code": 200,
+    "message": "All notifications marked as read successfully",
+    "data": null
+  }
+  ```
+}

@@ -1,0 +1,21 @@
+meta {
+  name: Get By Auth Token
+  type: http
+  seq: 2
+}
+
+get {
+  url: {{baseUrl}}/fcm/user/token
+  body: none
+  auth: inherit
+}
+
+docs {
+  # Get Token By Auth Token
+  
+  Retrieves the single active FCM device token for the currently authenticated user by decoding the access token in the Authorization header.
+  
+  ## Headers
+  
+  * `Authorization: Bearer <accessToken>`
+}

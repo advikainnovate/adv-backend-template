@@ -1,0 +1,21 @@
+meta {
+  name: Delete
+  type: http
+  seq: 6
+}
+
+delete {
+  url: {{baseUrl}}/notification-queue-sqs/:id
+  body: none
+  auth: none
+}
+
+params:path {
+  id: 
+}
+
+docs {
+  # Delete Queue
+  
+  Soft deletes a notification queue.
+}

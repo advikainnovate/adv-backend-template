@@ -1,0 +1,29 @@
+meta {
+  name: Publish Notification to SQS
+  type: http
+  seq: 1
+}
+
+post {
+  url: {{baseUrl}}/test-notifications/with-sqs
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "queueType": "ORDERS",
+    "payload": {
+      "userId": "user123",
+      "userType": "customer",
+      "notificationTypeCode": "order_created",
+      "channel": "email",
+      "recipient": "candyurahara@gmail.com",
+      "variables": {
+        "orderNumber": "ORD-SQS-88",
+        "customerName": "SQS Test User",
+        "orderTotal": "$299.99"
+      }
+    }
+  }
+}

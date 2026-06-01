@@ -1,0 +1,62 @@
+meta {
+  name: Update
+  type: http
+  seq: 5
+}
+
+put {
+  url: {{baseUrl}}/categories/:id
+  body: json
+  auth: none
+}
+
+params:path {
+  id: 
+}
+
+body:json {
+  {
+    "name": "Orders & Bookings",
+    "description": "Order and booking related notifications",
+    "isActive": true
+  }
+}
+
+docs {
+  # Update Category
+  
+  Updates an existing category.
+  
+  ## URL Parameters
+  
+  | Parameter | Type | Required | Description |
+  |-----------|------|----------|-------------|
+  | `id` | UUID | **Required** | Category ID |
+  
+  ## Request Body
+  
+  | Field | Type | Required | Description |
+  |-------|------|----------|-------------|
+  | `code` | string | Optional | Unique category code |
+  | `name` | string | Optional | Category display name |
+  | `description` | string | Optional | Category description |
+  | `isActive` | boolean | Optional | Active status |
+  
+  ## Example Response
+  ```json
+  {
+    "success": true,
+    "code": 200,
+    "message": "Category updated successfully",
+    "data": {
+      "id": "uuid",
+      "code": "orders",
+      "name": "Orders & Bookings",
+      "description": "Order and booking related notifications",
+      "isActive": true,
+      "createdAt": "2026-01-25T10:00:00.000Z",
+      "updatedAt": "2026-01-25T10:05:00.000Z"
+    }
+  }
+  ```
+}

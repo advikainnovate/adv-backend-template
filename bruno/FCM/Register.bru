@@ -1,0 +1,35 @@
+meta {
+  name: Register
+  type: http
+  seq: 1
+}
+
+post {
+  url: {{baseUrl}}/fcm
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "userId": "user123",
+    "userType": "consumer",
+    "deviceToken": "fcm-token-123456",
+    "platform": "android"
+  }
+}
+
+docs {
+  # Register FCM Token
+  
+  Registers a new FCM push token for a user. If the device token was already registered under any user, the old token registration will be hard deleted, and a new one will be created.
+  
+  ## Request Body
+  
+  | Field | Type | Required | Description |
+  |-------|------|----------|-------------|
+  | `userId` | string | **Required** | The user ID to associate the token with |
+  | `userType` | string | **Required** | The type/role of the user (e.g. consumer, partner, admin) |
+  | `deviceToken` | string | **Required** | The Firebase Cloud Messaging device registration token |
+  | `platform` | string | Optional | Operating platform (`android`, `ios`, `web`) |
+}

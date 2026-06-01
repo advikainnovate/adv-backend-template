@@ -1,0 +1,40 @@
+meta {
+  name: Logout
+  type: http
+  seq: 4
+}
+
+post {
+  url: {{baseUrl}}/auth/logout
+  body: none
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{accessToken}}
+}
+
+docs {
+  # Logout
+  
+  Logout the authenticated user.
+  
+  ## Authentication
+  
+  Requires Bearer token in Authorization header.
+  
+  ## Example Response
+  ```json
+  {
+    "success": true,
+    "code": 201,
+    "message": "Successfully LoggedOut",
+    "data": null
+  }
+  ```
+  
+  ## Notes
+  - Requires valid access token
+  - Token invalidation is handled client-side
+  - Clear stored tokens after logout
+}

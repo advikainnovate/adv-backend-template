@@ -1,0 +1,27 @@
+meta {
+  name: Delete
+  type: http
+  seq: 7
+}
+
+delete {
+  url: {{baseUrl}}/user-preferences/:id
+  body: none
+  auth: none
+}
+
+params:path {
+  id: 
+}
+
+docs {
+  # Delete User Preference
+  
+  Soft deletes a user preference.
+  
+  ## URL Parameters
+  
+  | Parameter | Type | Required | Description |
+  |-----------|------|----------|-------------|
+  | `id` | UUID | **Required** | Preference ID |
+}

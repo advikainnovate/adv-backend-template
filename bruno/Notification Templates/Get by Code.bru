@@ -1,0 +1,21 @@
+meta {
+  name: Get by Code
+  type: http
+  seq: 3
+}
+
+get {
+  url: {{baseUrl}}/templates/code/:code
+  body: none
+  auth: none
+}
+
+params:path {
+  code: order_created_email_customer
+}
+
+docs {
+  # Get Template by Code
+  
+  Retrieves a template by its unique code.
+}

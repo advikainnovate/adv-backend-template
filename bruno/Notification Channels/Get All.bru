@@ -1,0 +1,21 @@
+meta {
+  name: Get All
+  type: http
+  seq: 2
+}
+
+get {
+  url: {{baseUrl}}/channels?isActive=true
+  body: none
+  auth: none
+}
+
+params:query {
+  isActive: true
+}
+
+docs {
+  # List Channels
+  
+  Retrieves all notification channels.
+}

@@ -1,0 +1,21 @@
+meta {
+  name: Delete
+  type: http
+  seq: 5
+}
+
+delete {
+  url: {{baseUrl}}/templates/:id
+  body: none
+  auth: none
+}
+
+params:path {
+  id: 
+}
+
+docs {
+  # Delete Template
+  
+  Soft deletes a template.
+}

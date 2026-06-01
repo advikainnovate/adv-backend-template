@@ -1,0 +1,17 @@
+meta {
+  name: Get by ID
+  type: http
+  seq: 5
+}
+
+get {
+  url: {{baseUrl}}/role-preferences/replace-with-id
+  body: none
+  auth: none
+}
+
+docs {
+  # Get Role Preference by ID
+  
+  Retrieves a single role default preference record by its unique UUID.
+}

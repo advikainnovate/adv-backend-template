@@ -1,0 +1,41 @@
+meta {
+  name: Create
+  type: http
+  seq: 1
+}
+
+post {
+  url: {{baseUrl}}/notification-types
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "categoryCode": "orders",
+    "code": "order_created",
+    "name": "Order Created",
+    "description": "Triggered when a new order is created",
+    "priority": "MEDIUM",
+    "throttleMinutes": 0,
+    "isActive": true
+  }
+}
+
+docs {
+  # Create Notification Type
+  
+  Creates a new notification type.
+  
+  ## Request Body
+  
+  | Field | Type | Required | Description |
+  |-------|------|----------|-------------|
+  | `categoryCode` | string | **Required** | Category code reference |
+  | `code` | string | **Required** | Unique type code (lowercase) |
+  | `name` | string | **Required** | Type display name |
+  | `description` | string | Optional | Type description |
+  | `priority` | string | Optional | LOW, MEDIUM, HIGH, CRITICAL (default: LOW) |
+  | `throttleMinutes` | number | Optional | Throttle time in minutes (default: 0) |
+  | `isActive` | boolean | Optional | Active status (default: true) |
+}

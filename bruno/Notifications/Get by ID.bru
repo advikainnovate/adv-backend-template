@@ -1,0 +1,62 @@
+meta {
+  name: Get by ID
+  type: http
+  seq: 3
+}
+
+get {
+  url: {{baseUrl}}/notifications/:id
+  body: none
+  auth: none
+}
+
+params:path {
+  id: 
+}
+
+docs {
+  # Get Notification by ID
+  
+  Retrieves a single notification with all details including delivery attempts.
+  
+  ## URL Parameters
+  
+  | Parameter | Type | Required | Description |
+  |-----------|------|----------|-------------|
+  | `id` | UUID | **Required** | Notification ID |
+  
+  ## Example Response
+  ```json
+  {
+    "success": true,
+    "code": 200,
+    "message": "Notification retrieved successfully",
+    "data": {
+      "id": "uuid",
+      "userId": "user123",
+      "userType": "customer",
+      "notificationTypeCode": "order_created",
+      "categoryCode": "orders",
+      "channel": "email",
+      "title": "Order Confirmation - ORD-12345",
+      "message": "Dear John Doe...",
+      "status": "SENT",
+      "isRead": false,
+      "priority": "HIGH",
+      "sentAt": "2026-01-25T10:00:00.000Z",
+      "payload": {
+        "recipient": "customer@example.com",
+        "variables": {...}
+      },
+      "deliveryAttempts": [
+        {
+          "attemptNo": 1,
+          "status": "SUCCESS",
+          "channel": "email",
+          "attemptedAt": "2026-01-25T10:00:00.000Z"
+        }
+      ]
+    }
+  }
+  ```
+}

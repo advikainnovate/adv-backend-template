@@ -1,0 +1,25 @@
+meta {
+  name: Update
+  type: http
+  seq: 4
+}
+
+put {
+  url: {{baseUrl}}/channels/24b37626-591a-44fc-848a-110b0cb1390f
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "name": "Email Notifications",
+    "description": "Email message notifications",
+    "isActive": true
+  }
+}
+
+docs {
+  # Update Channel
+  
+  Updates an existing channel.
+}

@@ -1,0 +1,41 @@
+meta {
+  name: Get Unread Count
+  type: http
+  seq: 4
+}
+
+get {
+  url: {{baseUrl}}/notifications/unread-count
+  body: none
+  auth: inherit
+}
+
+params:query {
+  ~userId: d6c10fe7-6e38-4ef9-9afe-df8965a50613
+  ~userType: admin
+}
+
+docs {
+  # Get Unread Count
+  
+  Retrieves the total count of unread web/in-app notifications for a user.
+  
+  ## Query Parameters
+  
+  | Parameter | Type | Required | Description |
+  |-----------|------|----------|-------------|
+  | `userId` | string | **Required** | User ID |
+  | `userType` | string | **Required** | User type (customer, driver, admin) |
+  
+  ## Example Response
+  ```json
+  {
+    "success": true,
+    "code": 200,
+    "message": "Unread notification count retrieved successfully",
+    "data": {
+      "count": 5
+    }
+  }
+  ```
+}

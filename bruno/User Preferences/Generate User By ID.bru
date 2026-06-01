@@ -1,0 +1,33 @@
+meta {
+  name: Generate User By ID
+  type: http
+  seq: 8
+}
+
+post {
+  url: {{baseUrl}}/user-preferences/generate/:userId
+  body: none
+  auth: bearer
+}
+
+params:path {
+  userId: user_sqs_test
+}
+
+auth:bearer {
+  token: {{accessToken}}
+}
+
+docs {
+  # Generate User Preferences By ID
+  
+  Automatically initializes default notification preferences for a specific user ID specified as a path parameter.
+  
+  ## Path Parameters
+  
+  * `userId`: The ID of the target user to generate preferences for (e.g., `user_sqs_test`).
+  
+  ## Authentication
+  
+  * Optional Bearer Token in `Authorization` header. If provided and valid, it validates request access.
+}

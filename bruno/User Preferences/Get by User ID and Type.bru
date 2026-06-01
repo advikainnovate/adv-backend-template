@@ -1,0 +1,29 @@
+meta {
+  name: Get by User ID and Type
+  type: http
+  seq: 4
+}
+
+get {
+  url: {{baseUrl}}/user-preferences/user/:userId/:userType
+  body: none
+  auth: none
+}
+
+params:path {
+  userId: user123
+  userType: customer
+}
+
+docs {
+  # Get User Preferences
+  
+  Retrieves all notification preferences for a specific user.
+  
+  ## URL Parameters
+  
+  | Parameter | Type | Required | Description |
+  |-----------|------|----------|-------------|
+  | `userId` | string | **Required** | User ID |
+  | `userType` | string | **Required** | User type |
+}

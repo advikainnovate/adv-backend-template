@@ -1,0 +1,37 @@
+meta {
+  name: List All
+  type: http
+  seq: 3
+}
+
+get {
+  url: {{baseUrl}}/role-preferences
+  body: none
+  auth: none
+}
+
+params:query {
+  ~userType: customer
+  ~categoryCode: orders
+  ~channel: email
+  ~isEnabled: true
+  ~limit: 20
+  ~page: 1
+}
+
+docs {
+  # List All Role Preferences
+  
+  Retrieves a list of all role default preferences, with optional query filters.
+  
+  ## Query Parameters
+  
+  | Parameter | Type | Required | Description |
+  |-----------|------|----------|-------------|
+  | `userType` | string | Optional | Filter by user type / role |
+  | `categoryCode` | string | Optional | Filter by category code |
+  | `channel` | string | Optional | Filter by channel |
+  | `isEnabled` | boolean | Optional | Filter by status (true/false) |
+  | `limit` | number | Optional | Number of results (default: 20) |
+  | `page` | number | Optional | Page number for pagination (default: 1) |
+}

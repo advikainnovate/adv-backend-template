@@ -1,0 +1,21 @@
+meta {
+  name: Unregister
+  type: http
+  seq: 3
+}
+
+delete {
+  url: {{baseUrl}}/fcm/unregister
+  body: none
+  auth: inherit
+}
+
+docs {
+  # Unregister Tokens
+  
+  Unregisters (soft-deletes) all FCM device tokens associated with the currently authenticated user by resolving their `userId` and `userType` from the Authorization header.
+  
+  ## Headers
+  
+  * `Authorization: Bearer <accessToken>`
+}

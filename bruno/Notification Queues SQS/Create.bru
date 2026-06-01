@@ -1,0 +1,25 @@
+meta {
+  name: Create
+  type: http
+  seq: 1
+}
+
+post {
+  url: {{baseUrl}}/notification-queue-sqs
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "queueCode": "TEST_QUEUE",
+    "priority": "HIGH",
+    "description": "Test notification queue"
+  }
+}
+
+docs {
+  # Create Queue
+  
+  Creates a new notification queue SQS.
+}

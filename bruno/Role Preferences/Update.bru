@@ -1,0 +1,32 @@
+meta {
+  name: Update
+  type: http
+  seq: 6
+}
+
+put {
+  url: {{baseUrl}}/role-preferences/replace-with-id
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "isEnabled": false
+  }
+}
+
+docs {
+  # Update Role Preference
+  
+  Updates the attributes of an existing role default preference configuration.
+  
+  ## Request Body
+  
+  | Field | Type | Required | Description |
+  |-------|------|----------|-------------|
+  | `userType` | string | Optional | User type / role |
+  | `categoryCode` | string | Optional | Category code |
+  | `channel` | string | Optional | Channel code |
+  | `isEnabled` | boolean | Optional | Enable or disable state |
+}

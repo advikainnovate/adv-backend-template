@@ -1,0 +1,39 @@
+meta {
+  name: Get All
+  type: http
+  seq: 3
+}
+
+get {
+  url: {{baseUrl}}/user-preferences?userId=user123&userType=customer
+  body: none
+  auth: none
+}
+
+params:query {
+  ~userId: user123
+  ~userType: customer
+  ~categoryCode: orders
+  ~channel: email
+  ~isEnabled: true
+  ~limit: 20
+  ~page: 1
+}
+
+docs {
+  # List All Preferences
+  
+  Retrieves all user preferences with optional filters.
+  
+  ## Query Parameters
+  
+  | Parameter | Type | Required | Description |
+  |-----------|------|----------|-------------|
+  | `userId` | string | Optional | Filter by user ID |
+  | `userType` | string | Optional | Filter by user type |
+  | `categoryCode` | string | Optional | Filter by category |
+  | `channel` | string | Optional | Filter by channel |
+  | `isEnabled` | boolean | Optional | Filter by enabled status |
+  | `limit` | number | Optional | Number of results (default: 20) |
+  | `page` | number | Optional | Page number for pagination (default: 1) |
+}

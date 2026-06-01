@@ -1,0 +1,37 @@
+meta {
+  name: Create
+  type: http
+  seq: 2
+}
+
+post {
+  url: {{baseUrl}}/user-preferences
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "userId": "user123",
+    "userType": "customer",
+    "categoryCode": "orders",
+    "channel": "email",
+    "isEnabled": true
+  }
+}
+
+docs {
+  # Create User Preference
+  
+  Creates a new notification preference for a user.
+  
+  ## Request Body
+  
+  | Field | Type | Required | Description |
+  |-------|------|----------|-------------|
+  | `userId` | string | **Required** | User ID |
+  | `userType` | string | **Required** | User type (customer, driver, admin) |
+  | `categoryCode` | string | **Required** | Category code |
+  | `channel` | string | **Required** | Channel code (email, sms, push, etc.) |
+  | `isEnabled` | boolean | Optional | Whether notifications are enabled (default: true) |
+}
