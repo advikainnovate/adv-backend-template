@@ -43,7 +43,9 @@ exports.generateResetToken = (payload) => {
 exports.verifyResetToken = (token) => {
     return new Promise((resolve, reject) => {
         jwt.verify(token, CONFIG.JWT.ACCESS_TOKEN_SECRET, (err, decoded) => {
-            if (err || decoded.type !== 'reset') throw new BadRequestException('Invalid or expired reset token');
+            if (err || !decoded || decoded.type !== 'reset') {
+                return reject(new BadRequestException('Invalid or expired reset token'));
+            }
             resolve(decoded);
         });
     });

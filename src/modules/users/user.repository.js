@@ -1,4 +1,4 @@
-const { Op, where } = require('sequelize');
+const { Op } = require('sequelize');
 const db = require('../../database/models');
 const { PGSN, bcrypt } = require('../../utils');
 const { BadRequestException } = require('../../helpers');

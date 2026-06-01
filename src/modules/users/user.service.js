@@ -1,4 +1,4 @@
-const { HTTP_CODES, MESSAGES, CONSTANTS } = require('../../config');
+const { HTTP_CODES, MESSAGES } = require('../../config');
 const { serviceResponse, NotFoundException, BadRequestException } = require('../../helpers');
 const { bcrypt, jwt } = require('../../utils');
 const userRepository = require('./user.repository');

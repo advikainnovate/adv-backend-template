@@ -1,4 +1,3 @@
-const { CONFIG } = require('../../config');
 const { errorResponse, successResponse } = require('../../helpers');
 const userService = require('./user.service');
 
