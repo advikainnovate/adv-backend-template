@@ -1,7 +1,7 @@
 module.exports = {
     apps: [
         {
-            name: 'adv-backend-template',
+            name: 'adv-backend',
             script: 'server.js',
             instances: 'max',
             exec_mode: 'cluster',

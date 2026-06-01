@@ -16,8 +16,8 @@
         "dev": "nodemon server.js",
         "prod:start": "pm2 start ecosystem.config.js --env production",
         "prod:restart": "pm2 restart ecosystem.config.js",
-        "legacy:pm2:start": "pm2 start npm --name auth-go -- run start",
-        "legacy:pm2:restart": "pm2 restart auth-go"
+        "legacy:pm2:start": "pm2 start npm --name adv-backend -- run start",
+        "legacy:pm2:restart": "pm2 restart adv-backend"
     },
     "author": "",
     "license": "ISC",
