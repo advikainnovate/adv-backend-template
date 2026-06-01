@@ -6,56 +6,56 @@ const { jwt } = require('../utils');
 module.exports = {
     validateAccessToken:
         (allowedRoles = []) =>
-            async (req, res, next) => {
-                try {
-                    if (!req.headers.authorization) throw new UnauthorizedException(MESSAGES.ERROR.TOKEN_HEADER);
+        async (req, res, next) => {
+            try {
+                if (!req.headers.authorization) throw new UnauthorizedException(MESSAGES.ERROR.TOKEN_HEADER);
 
-                    const token = req.headers.authorization.split(' ')[1]; // Extracting Bearer token from header.
+                const token = req.headers.authorization.split(' ')[1]; // Extracting Bearer token from header.
 
-                    if (!token) throw new UnauthorizedException(MESSAGES.ERROR.TOKEN);
+                if (!token) throw new UnauthorizedException(MESSAGES.ERROR.TOKEN);
 
-                    const decoded = await jwt.verifyAccessToken(token);
+                const decoded = await jwt.verifyAccessToken(token);
 
-                    const user = await db.UserModel.findOne({ where: { id: decoded.id, deletedAt: null } });
+                const user = await db.UserModel.findOne({ where: { id: decoded.id, deletedAt: null } });
 
-                    if (!user) {
-                        throw new UnauthorizedException(MESSAGES.ERROR.UNAUTHORIZED);
-                    }
-
-                    if (user.isBlock) {
-                        throw new UnauthorizedException(MESSAGES.ERROR.FORBIDDEN);
-                    }
-
-                    if (allowedRoles.includes(decoded.role)) {
-                        req.user = decoded;
-                        next();
-                    } else {
-                        throw new UnauthorizedException(MESSAGES.ERROR.UNAUTHORIZED);
-                    }
-                } catch (error) {
-                    next(error);
+                if (!user) {
+                    throw new UnauthorizedException(MESSAGES.ERROR.UNAUTHORIZED);
                 }
-            },
+
+                if (user.isBlock) {
+                    throw new UnauthorizedException(MESSAGES.ERROR.FORBIDDEN);
+                }
+
+                if (allowedRoles.includes(decoded.role)) {
+                    req.user = decoded;
+                    next();
+                } else {
+                    throw new UnauthorizedException(MESSAGES.ERROR.UNAUTHORIZED);
+                }
+            } catch (error) {
+                next(error);
+            }
+        },
     validateRefreshToken:
         (allowedRoles = []) =>
-            async (req, res, next) => {
-                try {
-                    if (!req.headers.authorization) throw new UnauthorizedException(MESSAGES.AUTH_ERRORS.TOKEN_HEADER);
+        async (req, res, next) => {
+            try {
+                if (!req.headers.authorization) throw new UnauthorizedException(MESSAGES.AUTH_ERRORS.TOKEN_HEADER);
 
-                    const token = req.headers.authorization.split(' ')[1]; // Extracting Bearer token from header.s
-                    if (!token) throw new UnauthorizedException(MESSAGES.ERROR.TOKEN);
-                    const decoded = await jwt.verifyRefreshToken(token);
+                const token = req.headers.authorization.split(' ')[1]; // Extracting Bearer token from header.s
+                if (!token) throw new UnauthorizedException(MESSAGES.ERROR.TOKEN);
+                const decoded = await jwt.verifyRefreshToken(token);
 
-                    if (allowedRoles.includes(decoded.role)) {
-                        req.user = decoded;
-                        next();
-                    } else {
-                        throw new UnauthorizedException(MESSAGES.ERROR.UNAUTHORIZED);
-                    }
-                } catch (error) {
-                    next(error);
+                if (allowedRoles.includes(decoded.role)) {
+                    req.user = decoded;
+                    next();
+                } else {
+                    throw new UnauthorizedException(MESSAGES.ERROR.UNAUTHORIZED);
                 }
-            },
+            } catch (error) {
+                next(error);
+            }
+        },
     optionalAuth: async (req, res, next) => {
         try {
             // If no authorization header, continue without attaching user

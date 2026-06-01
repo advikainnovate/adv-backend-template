@@ -1,6 +1,4 @@
 module.exports = {
-    ID_PREFIXES: {
-    },
-    ID_CONFIG: {
-    },
+    ID_PREFIXES: {},
+    ID_CONFIG: {},
 };

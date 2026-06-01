@@ -19,7 +19,7 @@ exports.paginate = async (Model, options = {}, query = {}) => {
     const paginatedOptions = {
         ...options,
         limit,
-        offset
+        offset,
     };
 
     const response = await Model.findAndCountAll(paginatedOptions);

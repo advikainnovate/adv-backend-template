@@ -31,7 +31,7 @@ exports.register = async (payload) => {
     // Check display_name uniqueness if provided
     if (payload.display_name && payload.display_name.trim() !== '') {
         const existingUser = await db.UserModel.findOne({
-            where: { display_name: payload.display_name.toLowerCase() }
+            where: { display_name: payload.display_name.toLowerCase() },
         });
         if (existingUser) {
             throw new BadRequestException('Display name must be unique');

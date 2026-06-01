@@ -53,11 +53,11 @@ const generateSlugCode = (text) => {
         .toString()
         .toLowerCase()
         .trim()
-        .replace(/\s+/g, '_')           // Replace spaces with underscores
-        .replace(/[^\w_]+/g, '')        // Remove all non-word chars except underscores
-        .replace(/__+/g, '_')           // Replace multiple underscores with single underscore
-        .replace(/^_+/, '')             // Trim underscores from start
-        .replace(/_+$/, '');            // Trim underscores from end
+        .replace(/\s+/g, '_') // Replace spaces with underscores
+        .replace(/[^\w_]+/g, '') // Remove all non-word chars except underscores
+        .replace(/__+/g, '_') // Replace multiple underscores with single underscore
+        .replace(/^_+/, '') // Trim underscores from start
+        .replace(/_+$/, ''); // Trim underscores from end
 };
 
 module.exports = {

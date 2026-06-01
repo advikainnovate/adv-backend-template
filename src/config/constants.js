@@ -3,6 +3,6 @@ module.exports = {
     ROLE: { ADMIN: 'admin' },
     USER_STATUS: {
         ACTIVE: 'active',
-        INACTIVE: 'inactive'
+        INACTIVE: 'inactive',
     },
 };

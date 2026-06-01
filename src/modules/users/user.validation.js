@@ -4,7 +4,9 @@ const { CONSTANTS } = require('../../config');
 const userSchema = {
     register: {
         body: Joi.object().keys({
-            userType: Joi.string().valid(...Object.values(CONSTANTS.ROLE)).required(),
+            userType: Joi.string()
+                .valid(...Object.values(CONSTANTS.ROLE))
+                .required(),
             display_name: Joi.string().trim().optional(),
             email: Joi.string().trim().email().trim().required(),
             countryCode: Joi.string().trim().required(),

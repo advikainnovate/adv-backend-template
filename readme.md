@@ -4,23 +4,23 @@ A production-ready microservice template boilerplate built with Node.js, Express
 
 ## 🚀 Features
 
-*   **User CRUD Operations**: Ready-to-use CRUD endpoints for user management.
-*   **Stateless Authorization**: Robust JWT verification middleware (`validateAccessToken`, `validateRefreshToken`, `optionalAuth`) ready for microservice deployments.
-*   **Validation Layer**: Flexible input validation schema architecture using Joi.
-*   **Database Migrations**: Simple schema migrations and database seeding using Sequelize-CLI.
-*   **Logging**: High-performance logging utilizing Pino and Pino-pretty for clean local terminal debugging.
-*   **API Documentation**: Automatic interactive documentation rendered via Swagger at `/api-docs`.
-*   **Pre-configured Linting & Formatting**: Strict linting rules using ESLint and Prettier.
+- **User CRUD Operations**: Ready-to-use CRUD endpoints for user management.
+- **Stateless Authorization**: Robust JWT verification middleware (`validateAccessToken`, `validateRefreshToken`, `optionalAuth`) ready for microservice deployments.
+- **Validation Layer**: Flexible input validation schema architecture using Joi.
+- **Database Migrations**: Simple schema migrations and database seeding using Sequelize-CLI.
+- **Logging**: High-performance logging utilizing Pino and Pino-pretty for clean local terminal debugging.
+- **API Documentation**: Automatic interactive documentation rendered via Swagger at `/api-docs`.
+- **Pre-configured Linting & Formatting**: Strict linting rules using ESLint and Prettier.
 
 ## 🛠️ Tech Stack
 
-*   **Runtime**: Node.js / Bun
-*   **Framework**: Express.js
-*   **Database**: PostgreSQL
-*   **ORM**: Sequelize
-*   **Validation**: Joi
-*   **Logging**: Pino & Pino-Pretty
-*   **API Documentation**: Swagger / OpenAPI 3.0
+- **Runtime**: Node.js / Bun
+- **Framework**: Express.js
+- **Database**: PostgreSQL
+- **ORM**: Sequelize
+- **Validation**: Joi
+- **Logging**: Pino & Pino-Pretty
+- **API Documentation**: Swagger / OpenAPI 3.0
 
 ## 📂 Project Structure
 
@@ -41,6 +41,7 @@ src/
 ## ⚙️ Setup & Installation
 
 1.  **Install dependencies**
+
     ```bash
     bun install
     # or
@@ -49,6 +50,7 @@ src/
 
 2.  **Environment Configuration**
     Copy `.env.sample` to `.env` and fill out your PostgreSQL database and JWT token secrets.
+
     ```bash
     cp .env.sample .env
     ```
@@ -62,6 +64,7 @@ src/
 ## 🏃‍♂️ Running the Application
 
 ### Development Mode (with hot-reloading)
+
 ```bash
 bun run dev
 # or
@@ -69,6 +72,7 @@ npm run dev
 ```
 
 ### Production Mode
+
 ```bash
 bun start
 # or
